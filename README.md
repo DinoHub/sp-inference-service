@@ -1,4 +1,4 @@
-# ESC Inference Service
+# SP Inference Service
 
 Speaker Profiling Inference Service for AI App Store
 
