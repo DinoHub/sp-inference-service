@@ -8,7 +8,7 @@ class BaseConfig(BaseSettings):
     https://pydantic-docs.helpmanual.io/usage/settings/
     """
     # KNative assigns a $PORT environment variable to the container
-    port: int = Field(default=8080, env="PORT",description="Gradio App Server Port")
+    port: int = Field(default=8082, env="PORT",description="Gradio App Server Port")
     sp_model_path: str = 'models/sp_wav2vec.ckpt'
     labels_path: str = 'misc/total_spkrinfo.list'
     example_dir: str = 'examples'
