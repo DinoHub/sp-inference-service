@@ -1,0 +1,7 @@
+# Put any extra dependencies here
+gradio
+wavencoder
+pytorch-lightning
+torch-optimizer
+scikit-learn
+librosa
