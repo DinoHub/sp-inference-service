@@ -1,6 +1,4 @@
-import os
-import logging
-from typing import Any, List, Optional, Union, Dict, Tuple
+from typing import Union
 
 import torch
 import librosa
@@ -8,7 +6,6 @@ import gradio as gr
 
 from w2vlstm.lightning_model import LightningModel
 from config import config, BaseConfig
-from display.update_display import update_display
 
 ''' CPU/GPU Configurations '''
 if torch.cuda.is_available():
@@ -22,7 +19,7 @@ MAP_LOCATION: str = torch.device('cuda:{}'.format(DEVICE[0]) if ACCELERATOR == '
 
 ''' Gradio Input/Output Configurations '''
 inputs: Union[str, gr.Audio] = gr.Audio(source='upload', type='filepath')
-outputs: gr.HTML = gr.HTML()
+outputs: gr.HighlightedText = gr.HighlightedText()
 
 ''' Helper functions '''
 def initialize_sp_model(cfg: BaseConfig) -> LightningModel:
@@ -63,6 +60,5 @@ def predict(audio_path: str) -> str:
     height = round(sum(h_preds)/len(h_preds),2)
     age = int(sum(a_preds)/len(a_preds))
     gender = 'Female' if sum(g_preds)/len(g_preds) > 0.5 else 'Male'
-    update_display(gender, height, age, target_url='src/display/main.html')
 
-    return open('src/display/main.html').read()
+    return [(gender, 'Gender'), (height, 'Height'), (age, 'Age')]
